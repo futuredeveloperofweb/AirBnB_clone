@@ -61,7 +61,8 @@ class TestFileStorage_new_funct(unittest.TestCase):
         models.storage.new(amenity)
         models.storage.new(review)
 
-        self.assertIn("BaseModel." + base_model.id, models.storage.all().keys())
+        self.assertIn("BaseModel." + base_model.id,
+                      models.storage.all().keys())
         self.assertIn(base_model, models.storage.all().values())
 
         self.assertIn("User." + user.id, models.storage.all().keys())
