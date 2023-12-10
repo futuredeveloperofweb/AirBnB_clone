@@ -84,6 +84,20 @@ class TestFileStorage_new_funct(unittest.TestCase):
         self.assertIn(review, models.storage.all().values())
 
 
+'''
+class TestFileStorage_save_funct(self):
+
+    def test_save(self):
+        base_model = BaseModel()
+        amenity = Amenity()
+        review = Review()
+        user = User()
+        state = State()
+        place = Place()
+        city = City()
+'''
+
+
 class TestFileStorage_reload_funct(unittest.TestCase):
     '''test FileStorage with reload() method'''
 
@@ -97,12 +111,14 @@ class TestFileStorage_reload_funct(unittest.TestCase):
         city = City()
 
         models.storage.new(base_model)
+        models.storage.new(amenity)
+        models.storage.new(review)
         models.storage.new(user)
         models.storage.new(state)
         models.storage.new(place)
         models.storage.new(city)
-        models.storage.new(amenity)
-        models.storage.new(review)
+        models.storage.save()
+        models.storage.reload()
 
         ob = FileStorage._FileStorage__objects
         self.assertIn('BaseModel.' + base_model.id, ob)
