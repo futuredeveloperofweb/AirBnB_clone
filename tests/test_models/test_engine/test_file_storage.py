@@ -29,6 +29,9 @@ class TestFileStorage(unittest.TestCase):
     def test_private_attr__objects(self):
         self.assertEqual(dict, type(FileStorage._FileStorage__objects))
 
+    def test_storage_of_FileStorage(self):
+        self.assertEqual(type(models.storage), FileStorage)
+
 
 class TestFileStorage_all_funct(unittest.TestCase):
     '''test FileStorage with all() function'''
