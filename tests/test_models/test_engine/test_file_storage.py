@@ -10,7 +10,7 @@ from models.amenity import Amenity
 from models.review import Review
 import models
 import unittest
-
+import os
 
 class TestFileStorage(unittest.TestCase):
     '''test the basics of the FileStorage class'''
@@ -84,8 +84,14 @@ class TestFileStorage_new_funct(unittest.TestCase):
         self.assertIn(review, models.storage.all().values())
 
 
-'''
-class TestFileStorage_save_funct(self):
+class TestFileStorage_save_funct(unittest.TestCase):
+    '''test FileStorage with the method save()'''
+
+    def setUp(self):
+        try:
+            os.rename('file.json', 'tmp')
+        except IOError:
+            pass
 
     def test_save(self):
         base_model = BaseModel()
@@ -95,7 +101,30 @@ class TestFileStorage_save_funct(self):
         state = State()
         place = Place()
         city = City()
-'''
+
+        models.storage.new(base_model)
+        models.storage.new(amenity)
+        models.storage.new(review)
+        models.storage.new(user)
+        models.storage.new(state)
+        models.storage.new(place)
+        models.storage.new(city)
+        models.storage.save()
+
+        s_txt = ''
+        with open('file.json', 'r') as f:
+            s_txt = f.read()
+            self.assertIn("BaseModel." + base_model.id, s_txt)
+            self.assertIn("Amenity." + amenity.id, s_txt)
+            self.assertIn("State." + state.id, s_txt)
+            self.assertIn("Place." + place.id, s_txt)
+            self.assertIn("City." + city.id, s_txt)
+            self.assertIn("Review." + review.id, s_txt)
+            self.assertIn("User." + user.id, s_txt)
+
+    def test_save_with_args(self):
+        with self.assertRaises(TypeError):
+            models.storage.save(None)
 
 
 class TestFileStorage_reload_funct(unittest.TestCase):
