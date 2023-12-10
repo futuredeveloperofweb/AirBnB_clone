@@ -23,8 +23,11 @@ class TestFileStorage(unittest.TestCase):
         with self.assertRaises(TypeError):
             FileStorage(None)
 
-    def test_FileStorage_file_path(self):
+    def test_private_attr_file_path(self):
         self.assertEqual(str, type(FileStorage._FileStorage__file_path))
+
+    def test_private_attr__objects(self):
+        self.assertEqual(dict, type(FileStorage._FileStorage__objects))
 
 
 class TestFileStorage_all_funct(unittest.TestCase):
