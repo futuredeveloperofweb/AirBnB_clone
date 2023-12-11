@@ -89,14 +89,14 @@ class TestFileStorage_new_all_save_reload_funcs(unittest.TestCase):
 
         self.assertIn("Review." + review.id, models.storage.all().keys())
         self.assertIn(review, models.storage.all().values())
-    '''
+
     @classmethod
     def setUp(self):
         try:
             os.rename('file.json', 'tmp')
         except IOError:
             pass
-
+    '''
     @classmethod
     def tearDown(self):
         try:
