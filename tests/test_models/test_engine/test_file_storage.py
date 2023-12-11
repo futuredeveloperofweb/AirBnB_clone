@@ -96,7 +96,7 @@ class TestFileStorage_new_all_save_reload_funcs(unittest.TestCase):
             os.rename('file.json', 'tmp')
         except IOError:
             pass
-    '''
+
     @classmethod
     def tearDown(self):
         try:
@@ -108,7 +108,6 @@ class TestFileStorage_new_all_save_reload_funcs(unittest.TestCase):
         except IOError:
             pass
         FileStorage._FileStorage__objects = {}
-    '''
 
     def test_save(self):
         base_model = BaseModel()
