@@ -94,11 +94,25 @@ class TestFileStorage_new_funct(unittest.TestCase):
 class TestFileStorage_save_funct(unittest.TestCase):
     '''test FileStorage with the method save()'''
 
+    @classmethod
     def setUp(self):
         try:
             os.rename('file.json', 'tmp')
         except IOError:
             pass
+
+    @classmethod
+    def tearDown(self):
+        try:
+            os.remove("file.json")
+        except IOError:
+            pass
+        try:
+            os.rename("tmp", "file.json")
+        except IOError:
+            pass
+        FileStorage._FileStorage__objects = {}
+
 
     def test_save(self):
         base_model = BaseModel()
