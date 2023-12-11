@@ -33,6 +33,27 @@ class HBNBCommand(cmd.Cmd):
         '''An empty line + ENTER shouldn’t execute anything'''
         pass
 
+    def default(self, arg):
+        '''a function that convert some input methods into default methods'''
+        cmd = {
+            "all": self.do_all,
+            "show": self.do_show,
+            "destroy": self.do_destroy,
+            "count": self.do_count,
+            "update": self.do_update
+        }
+        d = re.search(r"\.", arg)
+        if d is not None:
+            lst = [arg[:d.span()[0]], arg[d.span()[1]:]]
+            d = re.search(r"\((.*?)\)", lst[1])
+            if d is not None:
+                part = [lst[1][:d.span()[0]], d.group()[1:-1]]
+                if part[0] in cmd.keys():
+                    c = f'{lst[0]} {part[1]}'
+                    return cmd[part[0]](c)
+        print(f'*** Unknown syntax: {arg} ***')
+        return False
+
     def do_create(self, arg):
         '''Creates a new instance of BaseModel'''
         args = arg.split()
@@ -123,12 +144,11 @@ class HBNBCommand(cmd.Cmd):
         <class name>.count()
         '''
         args = arg.split()
-
-        cmpt = 0
-        for v in storage.all().values():
-            if args[0] == v.__class__.__name__:
-                cpmt = cmpt + 1
-        print(cmpt)
+        c = 0
+        for obj in storage.all().values():
+            if obj.__class__.__name__ == args[0]:
+                c = c + 1
+        print(c)
 
 
 if __name__ == '__main__':
