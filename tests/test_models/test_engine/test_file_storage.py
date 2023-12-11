@@ -44,8 +44,8 @@ class TestFileStorage_all_funct(unittest.TestCase):
             models.storage.all(None)
 
 
-class TestFileStorage_new_funct(unittest.TestCase):
-    '''test FileStorage with new() function'''
+class TestFileStorage_new_all_save_reload_funcs(unittest.TestCase):
+    '''test FileStorage with new(), all(), save(), reload() functions'''
 
     def test_new(self):
         with self.assertRaises(TypeError):
@@ -89,10 +89,6 @@ class TestFileStorage_new_funct(unittest.TestCase):
 
         self.assertIn("Review." + review.id, models.storage.all().keys())
         self.assertIn(review, models.storage.all().values())
-
-
-class TestFileStorage_save_funct(unittest.TestCase):
-    '''test FileStorage with the method save()'''
 
     @classmethod
     def setUp(self):
@@ -146,10 +142,6 @@ class TestFileStorage_save_funct(unittest.TestCase):
     def test_save_with_args(self):
         with self.assertRaises(TypeError):
             models.storage.save(None)
-
-
-class TestFileStorage_reload_funct(unittest.TestCase):
-    '''test FileStorage with reload() method'''
 
     def test_reload(self):
         base_model = BaseModel()
