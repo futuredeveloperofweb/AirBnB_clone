@@ -89,7 +89,7 @@ class TestFileStorage_new_all_save_reload_funcs(unittest.TestCase):
 
         self.assertIn("Review." + review.id, models.storage.all().keys())
         self.assertIn(review, models.storage.all().values())
-
+    '''
     @classmethod
     def setUp(self):
         try:
@@ -108,7 +108,7 @@ class TestFileStorage_new_all_save_reload_funcs(unittest.TestCase):
         except IOError:
             pass
         FileStorage._FileStorage__objects = {}
-
+    '''
 
     def test_save(self):
         base_model = BaseModel()
