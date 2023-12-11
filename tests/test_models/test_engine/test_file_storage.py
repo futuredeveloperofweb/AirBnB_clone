@@ -137,7 +137,7 @@ class TestFileStorage_save_funct(unittest.TestCase):
 class TestFileStorage_reload_funct(unittest.TestCase):
     '''test FileStorage with reload() method'''
 
-    def test_reloar(self):
+    def test_reload(self):
         base_model = BaseModel()
         amenity = Amenity()
         review = Review()
